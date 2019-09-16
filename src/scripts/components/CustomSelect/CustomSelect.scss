@@ -1,0 +1,104 @@
+@mixin for-size($range) {
+	$mobileLandscape: 481px;
+	$tablet: 768px;
+	$desktop: 993px;
+	$desktopLarge: 1200px;
+
+	@if $range == mobile-landscape {
+		@media (min-width: $mobileLandscape) { @content; }
+	} @else if $range == tablet {
+		@media (min-width: $tablet) { @content; }
+	} @else if $range == desktop {
+		@media (min-width: $desktop) { @content; }
+	} @else if $range == desktop-large {
+		@media (min-width: $desktopLarge) { @content; }
+	}
+}
+
+.custom-select {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 14px;
+
+	&.open {
+		.select-doctors {
+			display: block;
+		}
+
+		.custom-select__title {
+			&::after {
+				transform: translateY(-50%) rotate(180deg);
+			}
+		}
+
+	}
+
+	&__title {
+		position: relative;
+		display: block;
+		width: 100%;
+		padding: 10px 15px;
+		background-color: #000;
+		color: #fff;
+		border: 1px solid #ccc;
+		font-family: 'Arial', 'Helvetica', sans-serif;
+		font-size: 16px;
+
+		&::after {
+			content: '▼';
+			position: absolute;
+			right: 5px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 10px;
+		}
+
+		&:hover {
+			@include for-size(desktop) {
+				@media(hover: hover) and (pointer: fine) {
+					cursor: pointer;
+				}
+			}
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.select-doctors {
+	display: none;
+	margin-top: -1px;
+	border: 1px solid #ccc;
+	background-color: #000;
+	text-align: center;
+	z-index: 150;
+
+	&__item {
+		padding: 10px 2px;
+		border-bottom: 1px solid rgba(204, 204, 204, .5);
+		font-family: 'Arial', 'Helvetica', sans-serif;
+		font-size: 16px;
+		cursor: pointer;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		@include for-size(desktop) {
+			@media(hover: hover) and (pointer: fine) {
+				border-bottom: none;
+			}
+		}
+
+		&:hover {
+			@include for-size(desktop) {
+				@media(hover: hover) and (pointer: fine) {
+					background-color: #ccc;
+					color: #000;
+				}
+			}
+		}
+	}
+}

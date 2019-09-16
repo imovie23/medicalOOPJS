@@ -1,0 +1,104 @@
+@mixin for-size($range) {
+	$mobileLandscape: 481px;
+	$tablet: 768px;
+	$desktop: 993px;
+	$desktopLarge: 1200px;
+
+	@if $range == mobile-landscape {
+		@media (min-width: $mobileLandscape) { @content; }
+	} @else if $range == tablet {
+		@media (min-width: $tablet) { @content; }
+	} @else if $range == desktop {
+		@media (min-width: $desktop) { @content; }
+	} @else if $range == desktop-large {
+		@media (min-width: $desktopLarge) { @content; }
+	}
+}
+
+.board {
+	//position: relative;
+	width: 80%;
+	margin: 0 auto;
+	min-height: 70vh;
+	background-color: #fbfbfb;
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	z-index: 100;
+	padding: 0 15px 0 15px;
+
+
+	&__default-txt {
+		font-family: "UniSansHeavyCAPS", "Georgia", "Times New Roman", serif;
+		font-size: 16px;
+		font-weight: 900;
+		color: #414141;
+		opacity: .7;
+		z-index: 20;
+
+	}
+
+	&__table-line-one:after {
+		content: '';
+		width: 0;
+		height: 100%;
+		position: absolute;
+		border-right: 1px solid #f2f2f2;
+		top: 0;
+		left: 10%;
+		z-index: 1;
+	}
+
+	&__table-line-two:after {
+		content: '';
+		width: 0;
+		height: 100%;
+		position: absolute;
+		border-right: 1px solid #f2f2f2;
+		top: 0;
+		left: 30%;
+		z-index: 1;
+	}
+
+	&__table-line-three:after {
+		content: '';
+		width: 0;
+		height: 100%;
+		position: absolute;
+		border-right: 1px solid #f2f2f2;
+		top: 0;
+		left: 50%;
+		z-index: 1;
+	}
+}
+
+@include for-size(mobile-landscape) {
+
+	.board__default-txt {
+		padding: 0 10px 0 10px;
+		font-size: 24px;
+	}
+
+}
+
+@include for-size(tablet) {
+	.board__default-txt {
+		font-size: 35px;
+	}
+
+}
+
+@include for-size(desktop) {
+	.board__default-txt {
+		padding: 0 10px 0 10px;
+		font-size: 49px;
+	}
+
+}
+
+@include for-size(desktopLarge) {
+	.note-board__default-txt {
+		font-size: 70px;
+	}
+
+}

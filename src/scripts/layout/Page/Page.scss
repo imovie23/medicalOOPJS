@@ -1,0 +1,166 @@
+@mixin for-size($range) {
+	$mobileLandscape: 481px;
+	$tablet: 768px;
+	$desktop: 993px;
+	$desktopLarge: 1200px;
+
+	@if $range == mobile-landscape {
+		@media (min-width: $mobileLandscape) { @content; }
+	} @else if $range == tablet {
+		@media (min-width: $tablet) { @content; }
+	} @else if $range == desktop {
+		@media (min-width: $desktop) { @content; }
+	} @else if $range == desktop-large {
+		@media (min-width: $desktopLarge) { @content; }
+	}
+}
+
+.page {
+	position: relative;
+	height: 100%;
+	background-color: #202020;
+	padding: 25px 0;
+
+	&__line {
+		content: '';
+		width: 0;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+
+		&:first-child:after {
+			content: '';
+			width: 0;
+			height: 100%;
+			position: absolute;
+			border-right: 1px solid rgba(255, 255, 255, .3);
+			top: 0;
+			left: 20px;
+			z-index: 1;
+		}
+
+		&--second:after {
+			content: '';
+			width: 0;
+			height: 100%;
+			position: absolute;
+			border-right: 1px solid rgba(255, 255, 255, .3);
+			top: 0;
+			left: 70px;
+			z-index: 1;
+		}
+
+		&--third:after {
+			content: '';
+			width: 0;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			z-index: 1;
+			border-right: 1px solid rgba(255, 255, 255, .3);
+			left: 120px;
+		}
+
+		&--fours:after {
+			content: '';
+			width: 0;
+			height: 100%;
+			position: absolute;
+			border-right: 1px solid rgba(255, 255, 255, .3);
+			top: 0;
+			left: 150px;
+			z-index: 1;
+		}
+	}
+
+	&__overlay {
+		position: absolute;
+		width: inherit;
+		height: inherit;
+
+		&:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background: rgba(0, 0, 0, .7);
+			opacity: 1;
+			z-index: 15;
+
+		}
+	}
+
+
+}
+
+
+@include for-size(mobile-landscape) {
+
+	.page__line {
+
+		&:first-child:after {
+			left: 50px;
+		}
+
+		&--second:after {
+			left: 100px;
+		}
+
+		&--third:after {
+			left: 150px;
+		}
+
+		&--fours:after {
+			left: 200px;
+		}
+	}
+
+}
+
+@include for-size(tablet) {
+	.page__line {
+
+		&:first-child:after {
+			left: 80px;
+		}
+
+		&--second:after {
+			left: 200px;
+		}
+
+		&--third:after {
+			left: 300px;
+		}
+
+		&--fours:after {
+			left: 400px;
+		}
+	}
+
+}
+
+@include for-size(desktop) {
+	.page__line {
+
+		&:first-child:after {
+			left: 100px;
+		}
+
+		&--second:after {
+			left: 300px;
+		}
+
+		&--third:after {
+			left: 500px;
+		}
+
+		&--fours:after {
+			left: 700px;
+		}
+	}
+
+}

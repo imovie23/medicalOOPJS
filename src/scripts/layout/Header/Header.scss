@@ -1,0 +1,241 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin for-size($range) {
+  $mobileLandscape: 481px;
+  $tablet: 768px;
+  $desktop: 993px;
+  $desktopLarge: 1200px;
+
+  @if $range == mobile-landscape {
+    @media (min-width: $mobileLandscape) {
+      @content;
+    }
+  } @else if $range == tablet {
+    @media (min-width: $tablet) {
+      @content;
+    }
+  } @else if $range == desktop {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  } @else if $range == desktop-large {
+    @media (min-width: $desktopLarge) {
+      @content;
+    }
+  }
+}
+
+.header-wrap {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.header {
+  position: relative;
+  width: 80%;
+  height: 80px;
+  margin: 0 auto;
+  background-color: #202020;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+
+  &__logo {
+    font: 12px "UniSansHeavyCAPS", "Georgia", "Times New Roman", serif;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  &__button-creat {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    line-height: 40px;
+    text-align: center;
+
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 0;
+      right: 0;
+      width: 1px;
+      height: 80px;
+      margin: auto;
+      background: #fff;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    &:hover::before {
+      animation: sword .5s;
+    }
+
+
+    @-webkit-keyframes sword {
+      0% {
+        top: -100px;
+        visibility: hidden;
+        opacity: 0;
+      }
+      20% {
+        visibility: visible;
+        opacity: 1;
+      }
+      100% {
+        top: 100px;
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+
+    @keyframes sword {
+      0% {
+        top: -100px;
+        visibility: hidden;
+        opacity: 0;
+      }
+      20% {
+        visibility: visible;
+        opacity: 1;
+      }
+      100% {
+        top: 100px;
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+
+  }
+
+
+  &__link {
+    @include flex-center;
+    display: block;
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 42px;
+      border-top: 1px solid #fff;
+      border-bottom: 1px solid #fff;
+      transition: all .5s 0s;
+    }
+
+    &::before {
+      left: 0;
+      border-left: 1px solid #fff;
+    }
+
+    &::after {
+      right: 0;
+      border-right: 1px solid #fff;
+    }
+
+    &:hover::before {
+      left: -20px;
+      transition: all .5s .2s;
+      opacity: 0;
+    }
+
+    &:hover::after {
+      right: -20px;
+      transition: all .5s .2s;
+      opacity: 0;
+    }
+
+  }
+
+
+  &__glitch {
+    //margin-right: 10px;
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    font-family: "UniSansHeavyCAPS", "Georgia", "Times New Roman", serif;
+    font-weight: 900;
+    z-index: 100;
+
+  }
+}
+
+
+@include for-size(mobile-landscape) {
+  .header {
+
+    &__logo {
+      font-size: 15px;
+    }
+
+    &__button-creat {
+      width: 150px;
+      height: 45px;
+    }
+
+    &__glitch {
+      font-size: 15px;
+    }
+
+  }
+
+}
+
+@include for-size(tablet) {
+  .header {
+
+    &__logo {
+      font-size: 17px;
+    }
+
+    &__button-creat {
+      width: 175px;
+
+    }
+
+    &__glitch {
+      font-size: 15px;
+    }
+
+  }
+
+}
+
+@include for-size(desktop) {
+  .header {
+
+    &__logo {
+      font-size: 20px;
+    }
+
+    &__button-creat {
+      width: 200px;
+
+    }
+
+    &__glitch {
+      font-size: 20px;
+    }
+
+  }
+
+}
+
+
+
+
